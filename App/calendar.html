@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <title>Gent gran</title>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+  <style>
+    #mapid {
+      height: 800px;
+    }
+  </style>
+</head>
+
+<body style="margin-top:100px">
+  <!--HEADER START-->
+  <div class="col">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <div class="col" style="text-align: left;">
+          <button type="button" class="btn mainButtons"><img src="img/user_icon.png" style="width: 2em;"></button>
+        </div>
+        <div class="col" style="text-align: right;">
+          <button type="button" class="btn mainButtons"><img src="img/suma_icon.png" style="width: 2em;"></button>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!--HEADER END-->
+  <div id="calendar-tab">
+    <img src="calendario-febrero-2020.png" style="width: 100%">
+  </div>
+  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons"><img src="calendar_icon.png" style="width: 2em;"></button>
+      </div>
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons" onclick="onMainPageClick()"><img src="home_icon.png"
+            style="width: 2em;"></button>
+      </div>
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons" onclick="onMapClick()"><img src="map_icon.png"
+            style="width: 2em;"></button>
+      </div>
+    </div>
+  </nav>
+
+  <script type="text/javascript" src="main.js"></script>
+  <script>
+
+    var actualDisplay = 2;
+
+    function onMainPageClick() {
+      window.location.assign("mainPage.html");
+    }
+
+    function onMapClick() {
+      window.location.assign("map.html");
+    }
+  </script>
+  <!--FOOTER START-->
+  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons" onclick="location.href='calendar.html'"><img
+            src="img/calendar_icon.png" style="width: 2em;"></button>
+      </div>
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons" onclick="location.href='eventos.php'"><img src="img/home_icon.png"
+            style="width: 2em;"></button>
+      </div>
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons" onclick="location.href='mapa/mat.html'"><img
+            src="img/map_icon.png" style="width: 2em;"></button>
+      </div>
+    </div>
+  </nav>
+  <!--FOOTER END-->
+</body>
+
+</html>

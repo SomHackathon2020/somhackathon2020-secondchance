@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- mapa -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Map demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+  <style type="text/css">
+    html,
+    body,
+    #mapid {
+      width: 100%;
+      height: calc(100% - 25.5px);
+      margin: 0px;
+      z-index: 1;
+    }
+  </style>
+
+  <!-- app -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+
+<body onload="init()">
+  <!--HEADER START-->
+  <div class="col">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <div class="col" style="text-align: left;">
+          <button type="button" class="btn mainButtons"><img src="img/user_icon.png" style="width: 2em;"></button>
+        </div>
+        <div class="col" style="text-align: right;">
+          <button type="button" class="btn mainButtons"><img src="img/suma_icon.png" style="width: 2em;"></button>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!--HEADER END-->
+  <span>
+    </button>
+    <div id="mapid" style="margin-top:50px"> </div>
+  </span>
+  </div>
+  <script>
+    var lat = 41.5421104;
+    var long = 2.4445;
+    var mymap = L.map('mapid').setView([lat, long], 13);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=EL TOKEN DE MAPBOX VA AQUI', {
+      maxZoom: 18,
+      id: 'mapbox.streets',
+      accessToken: 'pk.eyJ1IjoiY2FwdGFpbnBvdGF0byIsImEiOiJjanJ4bG43NTgwbWdvNDNvNXFpN2hjZ2M1In0.0uLVSmTx4ogG0D5HCka0mQ'
+    }).addTo(mymap);
+    mymap.attributionControl.setPrefix('');
+
+    //L.geoJson(statesData).addTo(mymap);
+    function style(feature) {
+      return {
+        fillColor: '#7194BC',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.01
+      };
+    }
+
+    //------------------------markers------------------------
+    var antiguetats = L.icon({
+      iconUrl: 'img/markers/puntero.png',
+      iconSize: [36, 50],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+    var arbre = L.icon({
+      iconUrl: 'img/markers/puntero.png',
+      iconSize: [36, 50],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+    var edifici = L.icon({
+      iconUrl: 'img/markers/puntero.png',
+      iconSize: [36, 50],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+    var escultura = L.icon({
+      iconUrl: 'img/markers/puntero.png',
+      iconSize: [36, 50],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+    var esglesia = L.icon({
+      iconUrl: 'img/markers/puntero.png',
+      iconSize: [36, 50],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+    var foto = L.icon({
+      iconUrl: 'img/markers/puntero.png',
+      iconSize: [36, 50],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+    var histories = L.icon({
+      iconUrl: 'img/markers/puntero.png',
+      iconSize: [36, 50],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+
+    var markers = [
+      { lat: 41.5270272, long: 2.4318997, icon: arbre, desc: "<b> Partida de bitlles  </b> <br> <br> Dijous 13 a les 18:00<br> <br>" },
+      { lat: 41.5296178, long: 2.43434634501406, icon: histories, desc: "<b> Ioga al parc Central  </b> <br> <br> Dijous 20 a les 9:00<br> <br>" },
+      { lat: 41.5407886, long: 2.44619817748447, icon: foto, desc: "<b> Excursió a la font del Teix  </b> <br> <br> Dijous 20 a les 9:00<br> <br>" },
+      { lat: 41.5312131, long: 2.43399675003955, icon: esglesia, desc: "<b> Quedada de gantxillo  </b> <br> <br> Divendres 20 a les 17:00<br> <br>" },
+      { lat: 41.54015325, long: 2.44529346885611, icon: escultura },
+      { lat: 41.5386719, long: 2.4460523, icon: edifici },
+      { lat: 41.54233855, long: 2.42548689435748, icon: arbre },
+      { lat: 41.5410262, long: 2.4246568, icon: escultura },
+      { lat: 41.5379803, long: 2.4302814, icon: foto }
+    ];
+
+    var customOptions =
+    {
+      'minWidth': '100',
+      'minHeight': '140',
+      'maxWidth': '200',
+      'minHeight': '260'
+    }
+
+    var markersDone = [];
+    markers.forEach(element => {
+      var markerLocation = new L.LatLng(
+        element.lat,
+        element.long
+      );
+      L.marker(markerLocation, { icon: element.icon }).bindPopup(element.desc, customOptions).addTo(mymap);
+      markersDone.push(markerLocation);
+      console.log(markerLocation);
+    });
+
+    var firstpolyline = new L.Polyline(TestMarkers, {
+      color: 'red',
+      weight: 3,
+      opacity: 0.5,
+      smoothFactor: 1
+    });
+    firstpolyline.addTo(mymap);
+    function createMarker() {
+      var newLat = document.getElementById("newLat").value;
+      var newLong = document.getElementById("newLong").value;
+      console.log(newLat);
+      console.log(newLong);
+      var markerLocation = new L.LatLng(
+        newLat,
+        newLong
+      );
+      L.marker(markerLocation, { icon: escultura }).addTo(mymap);
+    }
+    function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+        weight: 3,
+        color: '#7194BC',
+        dashArray: '',
+        fillOpacity: 0.3
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+      }
+    }
+
+    function resetHighlight(e) {
+      geojson.resetStyle(e.target);
+    }
+    function zoomToFeature(e) {
+      mymap.fitBounds(e.target.getBounds());
+    }
+
+    function onEachFeature(feature, layer) {
+      layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+      });
+    }
+
+    geojson = L.geoJson(statesData, {
+      style: style,
+      onEachFeature: onEachFeature
+    }).addTo(mymap);
+
+  </script>
+
+
+
+  <script>
+    var showingMap = true;
+    var showingUserMenu = false;
+
+    function changeMenuUser() {
+      if (showingUserMenu == true) {
+        document.getElementById("mapid").hidden = true;
+        document.getElementById("UserMenu").style.display = "block";
+        document.getElementById("button_search").style.display = "none";
+      }
+      else if (showingUserMenu == false) {
+        if (showingMap) {
+          document.getElementById("mapid").hidden = true;
+          document.getElementById("Invite").style.display = "block";
+          showingMap = false;
+          document.getElementById("button_search").style.display = "none";
+        }
+      }
+    }
+
+    function changeMenuMap() {
+      if (showingUserMenu == true) {
+        document.getElementById("mapid").hidden = false;
+        document.getElementById("UserMenu").style.display = "none";
+        document.getElementById("button_search").style.display = "block";
+      }
+      else if (showingUserMenu == false) {
+        if (showingMap == false) {
+          document.getElementById("mapid").hidden = false;
+          document.getElementById("Invite").style.display = "none";
+          showingMap = true;
+          document.getElementById("button_search").style.display = "block";
+        }
+      }
+    }
+
+    function showRegister() {
+      document.getElementById("Register").style.display = "block";
+    }
+
+    function closeRegister() {
+      document.getElementById("Invite").style.display = "none";
+      document.getElementById("UserMenu").style.display = "block";
+      showingUserMenu = true;
+      var userName = document.getElementById("user").value;
+      document.getElementById("Name").innerHTML = userName;
+    }
+
+    function prueba() {
+      document.getElementById("Invite").style.display = "none";
+    }
+
+    $('input:text').click(
+      function () {
+        $(this).val('');
+      });
+  </script>
+  <style>
+    #button_search {
+      position: fixed;
+      z-index: 2;
+      top: 1%;
+      right: 2%;
+      background-color: white;
+      padding: 0px;
+
+      height: 65px;
+      width: 65px;
+
+      border-radius: 50%;
+      border: 0px solid;
+    }
+
+    #button_search:hover {
+      background-color: lightskyblue;
+    }
+  </style>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+
+  <!--FOOTER START-->
+  <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons" onclick="location.href='/secondchance/app/app.php'"><img
+            src="img/calendar_icon.png" style="width: 2em;"></button>
+      </div>
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons" onclick="location.href='/secondchance/eventos.php'"><img
+            src="img/home_icon.png" style="width: 2em;"></button>
+      </div>
+      <div class="col" style="text-align: center;">
+        <button type="button" class="btn mainButtons"><img src="img/map_icon.png" style="width: 2em;"></button>
+      </div>
+    </div>
+  </nav>
+  <!--FOOTER END-->
+</body>
+
+</html>
